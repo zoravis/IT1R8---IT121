@@ -1,0 +1,36 @@
+def add(a, b):
+    return a + b
+def sub(a, b):
+    return a - b
+def mul(a, b):
+    return a * b
+def div(a, b):
+    if b == 0:
+        print("Cannot divide by 0")
+    else:
+        return a / b 
+
+while True:
+
+    print("Basic Calculator!\n")
+    num1 = int(input("Enter your first number: "))
+    num2 = int(input("Enter your second number: "))
+
+    print("\nOptions:\n---------------------\n1) Addition\n2) Subtraction\n3) Multiplication\n4) Division\n---------------------")
+    choice = int(input("Select which operation to use: "))
+
+    match choice:
+        case 1:
+            print(add(num1, num2))
+            break
+        case 2:
+            print(sub(num1, num2))
+            break
+        case 3:
+            print(mul(num1, num2))
+            break
+        case 4:
+            print(div(num1, num2))
+            break
+        case _:
+            print("\nInvalid Input! Try Again.\n")
