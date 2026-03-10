@@ -1,0 +1,74 @@
+class Item:
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
+
+    def __str__(self):
+        return f"{self.name} - ${self.price:.2f}"
+
+
+class shopcart:
+    def __init__(self):
+        self.items = []
+
+    def add_item(self, item):
+        self.items.append(item)
+        print(f"Added {item.name} to cart.")
+
+    def remove_item(self, item_name):
+        for item in self.items:
+            if item.name.lower() == item_name.lower():
+                self.items.remove(item)
+                print(f"Removed {item.name} from cart.")
+                return
+        print("Item not found in cart.")
+
+    def view_cart(self):
+        if not self.items:
+            print("Your cart is empty.")
+        else:
+            print("\nYour cart contains:")
+            for item in self.items:
+                print(f"- {item}")
+            print(f"Total: ${self.total():.2f}")
+
+    def total(self):
+        return sum(item.price for item in self.items)
+
+    def checkout(self):
+        if not self.items:
+            print("Your cart is empty. Nothing to checkout.")
+        else:
+            print("\nChecking out...")
+            self.view_cart()
+            print("\nThank you for shopping!")
+
+if __name__ == "__main__":
+    cart = shopcart()
+
+    while True:
+        print("\nOptions:\n1) add\n2) remove\n3) view\n4) checkout\n5) quit")
+        choice = input("Choose an option: ").strip().lower()
+
+        if choice == "1":
+            name = input("Enter item name: ")
+            price = float(input("Enter item price: "))
+            cart.add_item(Item(name, price))
+
+        elif choice == "2":
+            name = input("Enter item name to remove: ")
+            cart.remove_item(name)
+
+        elif choice == "3":
+            cart.view_cart()
+
+        elif choice == "4":
+            cart.checkout()
+            break
+
+        elif choice == "5":
+            print("\nThank you for shopping!")
+            break
+
+        else:
+            print("\nInvalid option. Try again.")
