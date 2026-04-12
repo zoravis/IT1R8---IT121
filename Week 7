@@ -1,0 +1,47 @@
+def show_menu():
+    print("\n--- ATM Menu ---")
+    print("1. Withdraw Money")
+    print("2. Check Balance")
+    print("3. Exit")
+
+def withdraw(balance):
+    try:
+        amount = float(input("Enter amount to withdraw: "))
+        if amount <= balance:
+            balance -= amount
+            print("Withdrawal successful!")
+            print("Remaining balance:", balance)
+        else:
+            print("Insufficient funds!")
+            while True:
+                choice = input("Type 'exit' to quit, 'balance' to check balance, or 'retry' to try again: ")
+                if choice.lower() == "exit":
+                    return balance, False
+                elif choice.lower() == "balance":
+                    print("Current balance:", balance)
+                elif choice.lower() == "retry":
+                    return withdraw(balance)
+                else:
+                    print("Invalid choice. Please try again.")
+        return balance, True
+    except ValueError:
+        print("Invalid input! Please enter a number.")
+        return balance, True
+
+balance = 1000
+running = True
+
+print("Welcome to the Simple ATM System!")
+while running:
+    show_menu()
+    choice = input("Choose an option: ")
+
+    if choice == "1":
+        balance, running = withdraw(balance)
+    elif choice == "2":
+        print("Your current balance is:", balance)
+    elif choice == "3":
+        print("Thank you for using the ATM. Goodbye!")
+        running = False
+    else:
+        print("Invalid choice. Please select 1-3.")
